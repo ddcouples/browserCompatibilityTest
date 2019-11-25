@@ -50,7 +50,6 @@ def pressF5():
     win32api.keybd_event(VK_CODE['F5'],0,win32con.KEYEVENTF_KEYUP,0)
 def pressQuicKey(keys=[]):
     for i in keys:
-        print(i)
         win32api.keybd_event(VK_CODE[i],0,0,0)
     for i in keys:
         win32api.keybd_event(VK_CODE[i],0,win32con.KEYEVENTF_KEYUP,0)
@@ -77,10 +76,14 @@ def openBrowser(path, url, isIE = False):
         time.sleep(1)
         pressCtrlShiftF5()
     else:
+        pressQuicKey('esc')
         pressF5()
     firsthWn =  win32gui.GetForegroundWindow()
     time.sleep(3)
-    screenshot('./ie.png')
+    now = int(round(time.time()*1000))
+    # now2 = time.strftime('%Y-%m-%d~%H:%M:%S',time.localtime(now/1000))
+    text = 'ie' if isIE else 'chrome49'
+    screenshot(f'./{text}-{now}.png')
     time.sleep(1)
     win32gui.PostMessage(firsthWn, win32con.WM_CLOSE, 0, 0)
 if __name__ == "__main__":    
