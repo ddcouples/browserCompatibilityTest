@@ -81,9 +81,10 @@ def openBrowser(path, url, isIE = False):
     firsthWn =  win32gui.GetForegroundWindow()
     time.sleep(3)
     now = int(round(time.time()*1000))
-    # now2 = time.strftime('%Y-%m-%d~%H:%M:%S',time.localtime(now/1000))
+    now2 = time.strftime('%Y-%m-%d~%H-%M-%S',time.localtime(now/1000))
+    print(now2)
     text = 'ie' if isIE else 'chrome49'
-    screenshot(f'./{text}-{now}.png')
+    screenshot(f'./dist/{text}-{now2}.png')
     time.sleep(1)
     win32gui.PostMessage(firsthWn, win32con.WM_CLOSE, 0, 0)
 if __name__ == "__main__":    
